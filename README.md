@@ -11,3 +11,22 @@
   docker run --name neo4j_container -p 7474:7474 -p 7687:7687 -e NEO4J_AUTH=neo4j/tjdls@1234 -d neo4j:latest
   ```
   
+- 필요한 Dependency
+  ```Groovy
+  implementation("org.springframework.boot:spring-boot-starter-data-neo4j")
+  implementation("org.neo4j.driver:neo4j-java-driver:5.6.0")
+  ```
+- application.yaml
+  ```yaml
+  
+  spring:
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+      username: neo4j
+      password: tjdls@1234
+  
+  ```
+
+- 추후 추가할 내용
+  - Relationship 설정에 대해 좀 더 공부해서 적용해 볼 예정. 당일은 단순 CRUD만 테스트 해 봄. 
