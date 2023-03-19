@@ -1,7 +1,5 @@
 package com.seoin.springdataneo4jexample
 
-import org.springframework.http.MediaType
-import org.springframework.http.ResponseEntity.created
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.net.URI
 
 @RestController
 @RequestMapping("/hi")
@@ -38,4 +35,21 @@ class ExampleController(
     fun deletePerson(
         @PathVariable(name = "name") name: String
     ) = ok(exampleService.delete(name))
+
+    @PostMapping("/stranger/{name}")
+    fun addFriendToSeoin(
+        @PathVariable(name = "name") strangerName: String
+    ) = ok(exampleService.addFriendToSeoin(strangerName))
+
+    @PostMapping("/book/{name}")
+    fun readBook(
+        @PathVariable(name = "name") name: String
+    ) = ok(exampleService.readBook(name))
+
+    @GetMapping("/book_list")
+    fun getBookList() = ok(exampleService.getBookReadList())
+
+    @GetMapping("/friend_list")
+    fun getFriendList() = ok(exampleService.getFriendsList())
+
 }

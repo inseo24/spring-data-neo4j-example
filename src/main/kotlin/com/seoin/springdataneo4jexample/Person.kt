@@ -13,6 +13,21 @@ class Person(
     var name: String
 ) {
 
+    @Relationship(type = "HAS_READ", direction = Relationship.Direction.OUTGOING)
+    var booksRead: MutableSet<Book>? = mutableSetOf()
+
+    @Relationship(type = "FRIENDS_WITH", direction = Relationship.Direction.OUTGOING)
+    var friends: MutableSet<Person>? = mutableSetOf()
+
+    fun addFriend(stranger: Person) {
+        this.friends?.add(stranger)
+        stranger.friends?.add(this)
+    }
+
+    fun readBook(book: Book) {
+        this.booksRead?.add(book)
+    }
+
     @Relationship(type = "TEAMMATE")
     var teammates: MutableSet<Person>? = null
 

@@ -5,7 +5,8 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ExampleService(
-    private val personRepository: PersonRepository
+    private val personRepository: PersonRepository,
+    private val bookRepository: BookRepository
 ) {
 
     @Transactional(readOnly = true)
@@ -33,4 +34,38 @@ class ExampleService(
             personRepository.delete(this)
         } ?: throw NoSuchElementException()
     }
+
+    @Transactional
+    fun addFriendToSeoin(strangerName: String) {
+        val seoin = getSeoin()
+        val stranger = personRepository.findByName(strangerName)
+            ?: throw NoSuchElementException("Stranger with name $strangerName not found")
+
+        stranger.addFriend(seoin)
+        seoin.addFriend(stranger)
+
+        personRepository.saveAll(listOf(seoin, stranger))
+    }
+
+    @Transactional
+    fun readBook(name: String) {
+        val book = bookRepository.findByTitle(name)
+            ?: Book(title = "Graph Database").also { bookRepository.save(it) }
+        val seoin = getSeoin()
+
+        seoin.readBook(book)
+        personRepository.save(seoin)
+    }
+
+    fun getFriendsList(): List<String>? {
+        val seoin = getSeoin()
+        return seoin.friends?.map { it.name }
+    }
+
+    fun getBookReadList(): MutableSet<Book>? {
+        val seoin = getSeoin()
+        return seoin.booksRead
+    }
+
+    private fun getSeoin() = personRepository.findByName("seoin") ?: throw NoSuchElementException()
 }
