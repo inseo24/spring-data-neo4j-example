@@ -88,8 +88,7 @@
       | 행 | 노드 |
       | 외래키 | 관계 |
       | 열 | 속성 |
-      | 조인 | 순회(traversal)
-      beginning at a defined start vertex and ends at a defined depth with the end vertex. |
+      | 조인 | 순회(traversal) - beginning at a defined start vertex and ends at a defined depth with the end vertex. |
       | 열에는 반드시 필드값을 가지고 있어야 한다. | 동일한 레이블을 가진 노드는 동일한 속성을 가질 필요가 없다. |
       | Join 을 할 때, 계산된다. | 관계는 생성될 때, 디스크에 저장된다. |
 
