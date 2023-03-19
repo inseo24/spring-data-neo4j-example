@@ -60,3 +60,37 @@
       The Neo4j internal Long Ids are deprecated, please consider using an external ID generator.
     ```
   
+
+-------
+
+- 별개로 GraphDB 관련 학습 정리
+  <details>
+  <summary>GraphDB 관련 </summary>
+
+    - Graph : Vertex & Edge
+    - GraphDB
+        - Native Graph Storage : 그래프 저장, 처리에 있어 최적화
+        - Index-free Adjacency : 연결된 노드는 DB에서 서로를 가리키고 있음
+            - 인덱스에 자유롭게 접근 가능. 데이터가 많아져도 접근 속도 유지.
+        - Relationship
+            - 관계 표현 / Label, Property, Directionality를 가짐
+        - 장점
+            - 성능
+                - RDB는 데이터 크기가 커질수록 join 비용이 커짐. 대부분의 NoSQL도 연결되지 않은 문서 집합을 저장해 애플리케이션 수준에서 집계를 조인해야 하므로 비용이 큼
+                - 반면 Graph DB는 데이터의 크기가 커져도 퍼포먼스가 일관적임. 전체 그래프 사이즈에 대한 쿼리가 실행되는 게 아니라 그 쿼리가 순회하는 그래프에 대해서만 쿼리가 실행됨
+            - Flexibility & Agility
+                - RDB처럼 미리 요구사항을 예상해서 설계할 필요가 없음
+    - RDB vs GraphDB
+
+      | RDBMS | Graph DB |
+      | --- | --- |
+      | 테이블 | 레이블 |
+      | 행 | 노드 |
+      | 외래키 | 관계 |
+      | 열 | 속성 |
+      | 조인 | 순회(traversal)
+      beginning at a defined start vertex and ends at a defined depth with the end vertex. |
+      | 열에는 반드시 필드값을 가지고 있어야 한다. | 동일한 레이블을 가진 노드는 동일한 속성을 가질 필요가 없다. |
+      | Join 을 할 때, 계산된다. | 관계는 생성될 때, 디스크에 저장된다. |
+
+  </details>
