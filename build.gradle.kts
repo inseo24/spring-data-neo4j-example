@@ -18,20 +18,29 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-neo4j")
-    implementation("org.neo4j.driver:neo4j-java-driver:5.6.0")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    // Neo4j
+    implementation("org.springframework.boot:spring-boot-starter-data-neo4j")
+    implementation("org.neo4j.driver:neo4j-java-driver:5.6.0")
+
+    // MySQL
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("mysql:mysql-connector-java:8.0.32")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 allOpen {
     annotation("org.springframework.data.neo4j.core.schema.Node")
+    annotation("jakarta.persistence.Entity")
 }
 
 noArg {
     annotation("org.springframework.data.neo4j.core.schema.Node")
+    annotation("jakarta.persistence.Entity")
 }
 
 tasks.withType<KotlinCompile> {
